@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-link">Skip to Main Content</a>
   <header>
     <nav>
       <ul>
@@ -17,12 +18,13 @@
         <li><a href="neighborhood.html">Neighborhood Walks</a></li>
         <li><a href="parks.html">Walks in the Park</a></li>
       </ul>
+      <img src="images/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue.">
     </nav>
-    <img src="images/BaconGallupPark.jpg" width="200" alt="Brown Labradoodle sitting next to a statue.">
+    
     <h1>Neighborhood Walks</h1>
   </header>
-  <main>
-    <div>
+  <main id="main-content">
+    <div class="grid">
       <img src="images/bend_in_the_road.jpg"
         alt="a purple tree stands in contrast to the green leaved trees along a bend in the road" width="100">
       <img src="images/pink_blossoms.jpg" alt="small pink blossoms on an otherwise green leaved tree" width="100">
@@ -46,73 +48,6 @@
       Students are invited to make changes.</p>
   </footer>
 
-<script>
-    const coursera_getParentTargetDomain = function() {
-      if (location.ancestorOrigins && location.ancestorOrigins[0]) {
-        return location.ancestorOrigins[0];
-      }
-      return "https://www.coursera.org";
-    };
-    </script>
-<script>
-    if (window.parent !== window) {
-      (function() {
-        var historyWrapper = function(functionType) {
-          var whichFunc = history[functionType];
-          return function() {
-            var response = whichFunc.apply(this, arguments);
-            var eventRes = new Event(functionType);
-            eventRes.arguments = arguments;
-            window.dispatchEvent(eventRes);
-            return response;
-          };
-        };
-        history.pushState = historyWrapper("pushState");
-        history.replaceState = historyWrapper("replaceState");
-        const sendInnerFrameUrl = function() {
-          window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
-        };
-        window.addEventListener("pushState",    sendInnerFrameUrl);
-        window.addEventListener("replaceState", sendInnerFrameUrl);
-        window.addEventListener("popstate",     sendInnerFrameUrl);
-        window.addEventListener("hashchange",   sendInnerFrameUrl);
-      })();
-    }
-    </script>
-<script>
-    if (window.parent !== window) {
-      window.parent.postMessage({'innerFrameUrl': window.location.href, 'fromInnerFrame': true}, coursera_getParentTargetDomain());
-    }
-    </script>
-<script>
-    if (window.parent !== window) {
-      (function() {
-        function throttle(callback, limit) {
-          var waiting = false;                      // Initially, we're not waiting
-          return function () {                      // We return a throttled function
-            if (!waiting) {                         // If we're not waiting
-              callback.apply(this, arguments);      // Execute users function
-              waiting = true;                       // Prevent future invocations
-              setTimeout(function () {              // After a period of time
-                  waiting = false;                  // And allow future invocations
-              }, limit);
-            }
-          }
-        }
-
-        const notify = (userActionType) => {
-          window.parent.postMessage({'isActive': true, 'fromInnerFrame': true, 'userActionType': userActionType}, coursera_getParentTargetDomain());
-        };
-
-        const throttledNotifyKeyPress = throttle(() => notify('key_press'), 10000);
-        const throttledNotifyMouseMovement = throttle(() => notify('mouse_movement'), 10000);
-        const throttledNotifyClick = throttle(() => notify('key_press'), 10000);
-
-        window.addEventListener('keydown', throttledNotifyKeyPress);
-        window.addEventListener('mousemove', throttledNotifyMouseMovement);
-        window.addEventListener('click', throttledNotifyClick);
-      })();
-    }
-    </script></body>
+</body>
 
 </html>
